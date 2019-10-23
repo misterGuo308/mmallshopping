@@ -74,7 +74,7 @@
         <dependency>
             <groupId>commons-net</groupId>
             <artifactId>commons-net</artifactId>
-            <version>3.6</version>
+            <version>3.1</version>
         </dependency>
 
         <!-- 分页插件 -->
@@ -142,23 +142,5 @@
             </plugin>
         </plugins>
     </build>
-    <profiles>
-        <!--开发环境-->
-        <profile>
-            <id>dev</id>
-            <properties>
-                <build.profile.id>dev</build.profile.id>
-            </properties>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
-        </profile>
-        <!--测试环境-->
-        <profile>
-            <id>test</id>
-            <properties>
-                <build.profile.id>pord</build.profile.id>
-            </properties>
-        </profile>
-    </profiles>
+
 </project>
