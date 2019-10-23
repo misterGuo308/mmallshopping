@@ -19,6 +19,7 @@ import javax.servlet.http.HttpSession;
 @RestController
 @RequestMapping("/user")
 public class UserController {
+
     @Resource
     private UserService userService;
 
