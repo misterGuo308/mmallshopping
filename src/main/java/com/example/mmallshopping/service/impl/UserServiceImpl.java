@@ -40,7 +40,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public ServerResponse<String> register(User user) {
+    public ServerResponse<String> addRegister(User user) {
         ServerResponse<String> validResponse = this.checkValid(user.getUsername(), Const.USERNAME);
         if (!validResponse.isSuccess()) {
             return validResponse;
@@ -103,7 +103,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public ServerResponse<String> forgetResetPassword(String username, String passwordNew, String forgetToken) {
+    public ServerResponse<String> updatePassword(String username, String passwordNew, String forgetToken) {
         if (StringUtils.isBlank(forgetToken)) {
             return ServerResponse.createByErrorMessage("参数错误,token需要传递");
         }
@@ -125,7 +125,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public ServerResponse<String> resetPassword(String passwordOld, String passwordNew, User user) {
+    public ServerResponse<String> updatePassword(String passwordOld, String passwordNew, User user) {
         int result = userMapper.checkPassword(user.getId(), MD5Util.MD5EncodeUtf8(passwordOld));
         if (result == 0) {
             return ServerResponse.createByErrorMessage("旧密码不正确");

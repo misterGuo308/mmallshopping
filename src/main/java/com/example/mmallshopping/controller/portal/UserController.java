@@ -47,7 +47,7 @@ public class UserController {
 
     @PostMapping("/register")
     public ServerResponse<String> register(User user) {
-        return userService.register(user);
+        return userService.addRegister(user);
     }
 
     @PostMapping("/check_valid")
@@ -84,7 +84,7 @@ public class UserController {
      */
     @PostMapping("/forget_reset_password")
     public ServerResponse<String> forgetResetPassword(String username, String passwordNew, String forgetToken) {
-        return userService.forgetResetPassword(username, passwordNew, forgetToken);
+        return userService.updatePassword(username, passwordNew, forgetToken);
     }
 
     @PostMapping("/reset_password")
@@ -93,7 +93,7 @@ public class UserController {
         if (user == null) {
             return ServerResponse.createByErrorMessage("用户未登录,请先登录本系统");
         }
-        return userService.resetPassword(passwordOld, passwordNew, user);
+        return userService.updatePassword(passwordOld, passwordNew, user);
     }
 
     @PostMapping("/update_information")

@@ -10,7 +10,7 @@ import com.example.mmallshopping.pojo.User;
 public interface UserService {
     ServerResponse login(String username, String password);
 
-    ServerResponse<String> register(User user);
+    ServerResponse<String> addRegister(User user);
 
     ServerResponse<String> checkValid(String str, String type);
 
@@ -18,9 +18,9 @@ public interface UserService {
 
     ServerResponse<String> checkAnswer(String username, String question, String answer);
 
-    ServerResponse<String> forgetResetPassword(String username, String passwordNew, String forgetToken);
+    ServerResponse<String> updatePassword(String username, String passwordNew, String forgetToken);
 
-    ServerResponse<String> resetPassword(String passwordOld, String passwordNew, User user);
+    ServerResponse<String> updatePassword(String passwordOld, String passwordNew, User user);
 
     ServerResponse<User> updateInformation(User user);
 
