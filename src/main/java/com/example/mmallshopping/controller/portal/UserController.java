@@ -42,7 +42,7 @@ public class UserController {
     @PostMapping("/logout")
     public ServerResponse<String> logout(HttpSession session) {
         session.removeAttribute(Const.CURRENT_USER);
-        return ServerResponse.createBySuccess();
+        return ServerResponse.createBySuccessMessage("用户退出成功");
     }
 
     @PostMapping("/register")
@@ -50,7 +50,7 @@ public class UserController {
         return userService.register(user);
     }
 
-    @PostMapping("/checkValid")
+    @PostMapping("/check_valid")
     public ServerResponse<String> checkValid(String str, String type) {
         return userService.checkValid(str, type);
     }

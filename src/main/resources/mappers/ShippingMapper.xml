@@ -40,7 +40,7 @@
     values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{receiverName,jdbcType=VARCHAR}, 
       #{receiverPhone,jdbcType=VARCHAR}, #{receiverMobile,jdbcType=VARCHAR}, #{receiverProvince,jdbcType=VARCHAR}, 
       #{receiverCity,jdbcType=VARCHAR}, #{receiverDistrict,jdbcType=VARCHAR}, #{receiverAddress,jdbcType=VARCHAR}, 
-      #{receiverZip,jdbcType=VARCHAR},  now(), #{updateTime,jdbcType=TIMESTAMP}
+      #{receiverZip,jdbcType=VARCHAR},  now() , now(),
       )
   </insert>
   <insert id="insertSelective" parameterType="com.example.mmallshopping.pojo.Shipping">
@@ -76,12 +76,7 @@
       <if test="receiverZip != null">
         receiver_zip,
       </if>
-      <if test="createTime != null">
-        create_time,
-      </if>
-      <if test="updateTime != null">
-        update_time,
-      </if>
+        create_time, update_time,
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -114,12 +109,7 @@
       <if test="receiverZip != null">
         #{receiverZip,jdbcType=VARCHAR},
       </if>
-      <if test="createTime != null">
-        now(),
-      </if>
-      <if test="updateTime != null">
-        #{updateTime,jdbcType=TIMESTAMP},
-      </if>
+        now(),  now(),
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.example.mmallshopping.pojo.Shipping">
@@ -155,9 +145,7 @@
       <if test="createTime != null">
         create_time = #{createTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="updateTime != null">
         update_time =  now(),
-      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>

@@ -35,8 +35,7 @@
         update_time)
         values (#{id,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR},
         #{email,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{question,jdbcType=VARCHAR},
-        #{answer,jdbcType=VARCHAR}, #{role,jdbcType=INTEGER}, now(),
-        #{updateTime,jdbcType=TIMESTAMP})
+        #{answer,jdbcType=VARCHAR}, #{role,jdbcType=INTEGER}, now(),now()
     </insert>
     <insert id="insertSelective" parameterType="com.example.mmallshopping.pojo.User">
         insert into mmall_user
@@ -65,12 +64,7 @@
             <if test="role != null">
                 role,
             </if>
-            <if test="createTime != null">
-                create_time,
-            </if>
-            <if test="updateTime != null">
-                update_time,
-            </if>
+                create_time,update_time,
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="id != null">
@@ -97,12 +91,7 @@
             <if test="role != null">
                 #{role,jdbcType=INTEGER},
             </if>
-            <if test="createTime != null">
-                now(),
-            </if>
-            <if test="updateTime != null">
-                #{updateTime,jdbcType=TIMESTAMP},
-            </if>
+                now(),now()
         </trim>
     </insert>
     <update id="updateByPrimaryKeySelective" parameterType="com.example.mmallshopping.pojo.User">
@@ -132,9 +121,7 @@
             <if test="createTime != null">
                 create_time = #{createTime,jdbcType=TIMESTAMP},
             </if>
-            <if test="updateTime != null">
                 update_time = now(),
-            </if>
         </set>
         where id = #{id,jdbcType=INTEGER}
     </update>
@@ -160,7 +147,7 @@
         select count(1) from mmall_user
         where email =#{email}
     </select>
-    <select id="selectBbyLogin" resultType="map">
+    <select id="selectBbyLogin" resultMap="BaseResultMap" parameterType="map">
         select
         <include refid="Base_Column_List"/>
         from mmall_user

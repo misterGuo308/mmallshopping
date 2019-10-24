@@ -27,11 +27,9 @@
   </delete>
   <insert id="insert" parameterType="com.example.mmallshopping.pojo.Category">
     insert into mmall_category (id, parent_id, name, 
-      status, sort_order, create_time, 
-      update_time)
+      status, sort_order, create_time,  update_time)
     values (#{id,jdbcType=INTEGER}, #{parentId,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, 
-      #{status,jdbcType=BIT}, #{sortOrder,jdbcType=INTEGER},  now(),
-      #{updateTime,jdbcType=TIMESTAMP})
+      #{status,jdbcType=BIT}, #{sortOrder,jdbcType=INTEGER},  now(),now()
   </insert>
   <insert id="insertSelective" parameterType="com.example.mmallshopping.pojo.Category">
     insert into mmall_category
@@ -51,12 +49,7 @@
       <if test="sortOrder != null">
         sort_order,
       </if>
-      <if test="createTime != null">
-        create_time,
-      </if>
-      <if test="updateTime != null">
-        update_time,
-      </if>
+        create_time,update_time,
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -74,12 +67,7 @@
       <if test="sortOrder != null">
         #{sortOrder,jdbcType=INTEGER},
       </if>
-      <if test="createTime != null">
-        now(),
-      </if>
-      <if test="updateTime != null">
-        #{updateTime,jdbcType=TIMESTAMP},
-      </if>
+        now(),now(),
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.example.mmallshopping.pojo.Category">
@@ -100,9 +88,7 @@
       <if test="createTime != null">
         create_time = #{createTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="updateTime != null">
         update_time = now(),
-      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>

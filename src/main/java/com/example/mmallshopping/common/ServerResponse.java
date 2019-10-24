@@ -1,5 +1,6 @@
 package com.example.mmallshopping.common;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
@@ -81,7 +82,7 @@ public class ServerResponse<T> implements Serializable {
     public static <T> ServerResponse<T> createByErrorCodeMessage(int errorCode, String errorMessage) {
         return new ServerResponse<T>(errorCode, errorMessage);
     }
-
+    @JsonIgnore
     public boolean isSuccess() {
         return this.status == ResponseCode.SUCCESS.getCode();
     }

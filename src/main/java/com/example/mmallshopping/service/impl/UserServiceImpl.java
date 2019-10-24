@@ -26,7 +26,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public ServerResponse login(String username, String password) {
         ServerResponse<String> validResponse = this.checkValid(username, Const.USERNAME);
-        if (!validResponse.isSuccess()) {
+        if (validResponse.isSuccess()) {
             return ServerResponse.createByErrorMessage("用户不存在");
         }
         //MD5
@@ -49,6 +49,7 @@ public class UserServiceImpl implements UserService {
         if (!validResponse.isSuccess()) {
             return validResponse;
         }
+        user.setRole(Const.role.ROLE_CUSTOMER);
         user.setPassword(MD5Util.MD5EncodeUtf8(user.getPassword()));
         return userMapper.insertSelective(user) > 0 ? ServerResponse.createBySuccessMessage("用户注册成功") : ServerResponse.createByErrorMessage("用户注册失败");
     }
@@ -61,7 +62,7 @@ public class UserServiceImpl implements UserService {
         if (Const.USERNAME.equals(type)) {
             int resultCount = userMapper.checkUsername(str);
             if (resultCount > 0) {
-                ServerResponse.createByErrorMessage("用户已存在");
+          return  ServerResponse.createByErrorMessage("用户已存在");
             }
         }
         if (Const.EMAIL.equals(type)) {
@@ -76,7 +77,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public ServerResponse<String> selectQuestion(String username) {
         ServerResponse<String> validResponse = this.checkValid(username, Const.USERNAME);
-        if (!validResponse.isSuccess()) {
+        if (validResponse.isSuccess()) {
             return ServerResponse.createByErrorMessage("用户不存在");
         }
         String question = userMapper.selectQuestionByUsername(username);
@@ -89,7 +90,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public ServerResponse<String> checkAnswer(String username, String question, String answer) {
         ServerResponse<String> validResponse = this.checkValid(username, Const.USERNAME);
-        if (!validResponse.isSuccess()) {
+        if (validResponse.isSuccess()) {
             return ServerResponse.createByErrorMessage("用户不存在");
         }
         int resultRequest = userMapper.checkAnswer(username, question, answer);
@@ -107,7 +108,7 @@ public class UserServiceImpl implements UserService {
             return ServerResponse.createByErrorMessage("参数错误,token需要传递");
         }
         ServerResponse<String> validResponse = this.checkValid(username, Const.USERNAME);
-        if (!validResponse.isSuccess()) {
+        if (validResponse.isSuccess()) {
             return ServerResponse.createByErrorMessage("用户不存在");
         }
         String token = TokenCache.getKey(TokenCache.TOKEN_PREFIX + username);
