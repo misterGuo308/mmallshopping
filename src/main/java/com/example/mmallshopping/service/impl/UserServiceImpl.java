@@ -148,7 +148,7 @@ public class UserServiceImpl implements UserService {
         updateUser.setQuestion(user.getQuestion());
         updateUser.setAnswer(user.getAnswer());
         result = userMapper.updateByPrimaryKeySelective(updateUser);
-        return result > 0 ? ServerResponse.createBySuccessMessage("用户信息修改成功") : ServerResponse.createByErrorMessage("用户信息修改失败");
+        return result > 0 ? ServerResponse.createBySuccess("用户信息修改成功",updateUser) : ServerResponse.createByErrorMessage("用户信息修改失败");
     }
 
     @Override
@@ -156,7 +156,7 @@ public class UserServiceImpl implements UserService {
         User user = userMapper.selectByPrimaryKey(id);
         if (user != null) {
             user.setPassword(StringUtils.EMPTY);
-            ServerResponse.createBySuccess(user);
+          return   ServerResponse.createBySuccess(user);
         }
         return ServerResponse.createByErrorMessage("获取用户信息失败");
     }
